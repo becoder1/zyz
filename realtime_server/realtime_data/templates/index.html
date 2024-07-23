@@ -1,0 +1,20 @@
+<!-- realtime_data/templates/index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Realtime Data</title>
+</head>
+<body>
+    <div id="realtime-data"></div>
+    <h1>网页</h1>
+    <script>
+        const websocket = new WebSocket('ws://localhost:8000/ws/realtime/');
+        websocket.onmessage = function(event) {
+            const data = JSON.parse(event.data);
+            const realtimeDataDiv = document.getElementById('realtime-data');
+            const message = `Random Number: ${data.value} (Timestamp: ${data.timestamp})<br>`;
+            realtimeDataDiv.innerHTML += message;
+        };
+    </script>
+</body>
+</html>
